@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:cassandra="http://www.springframework.org/schema/data/cassandra"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/cql http://www.springframework.org/schema/cql/spring-cql-1.0.xsd
+http://www.springframework.org/schema/data/cassandra http://www.springframework.org/schema/data/cassandra/spring-cassandra-1.0.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <!--引入properties文件-->
+    <context:property-placeholder location="classpath:cassandra.properties"/>
+    <!--配置Cassandra的IP地址和端口-->
+    <cassandra:cluster contact-points="${cassandra.contactpoints}" port="${cassandra.port}"/>
+    <!--cassandra的会话-->
+    <cassandra:session keyspace-name="${cassandra.keyspace}"/>
+    <!--cassandra的映射-->
+    <cassandra:mapping/>
+    <!--Cassandra的类型转换-->
+    <cassandra:converter/>
+    <!--cassandra的工具类-->
+    <cassandra:template id="cassandraTemplate"/>
+    <!--spring data cassandra接口包-->
+    <cassandra:repositories base-package="com.wuqiang.springcass.repository"/>
+    <!--开启自动扫描-->
+    <context:component-scan base-package="com.wuqiang"/>
+
+</beans>
